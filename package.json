@@ -1,6 +1,6 @@
 {
   "name": "meteor-rxjs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Use Meteor API in RxJS style",
   "keywords": [
     "rxjs",

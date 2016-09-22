@@ -5,9 +5,17 @@ var MongoObservable;
 (function (MongoObservable) {
     'use strict';
     var Collection = (function () {
-        function Collection(name, options) {
-            this._collection = new Mongo.Collection(name, options);
+        function Collection(nameOrExisting, options) {
+            if (typeof nameOrExisting === 'string') {
+                this._collection = new Mongo.Collection(nameOrExisting, options);
+            }
+            else {
+                this._collection = nameOrExisting;
+            }
         }
+        Collection.fromExisting = function (collection) {
+            return new MongoObservable.Collection(collection);
+        };
         Object.defineProperty(Collection.prototype, "collection", {
             get: function () {
                 return this._collection;

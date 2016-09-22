@@ -28,8 +28,16 @@ export module MongoObservable {
   export class Collection<T> {
     private _collection: Mongo.Collection<T>;
 
-    constructor(name: string, options?: ConstructorOptions) {
-      this._collection = new Mongo.Collection<T>(name, options);
+    static fromExisting<T>(collection: Mongo.Collection<T>) {
+      return new MongoObservable.Collection(collection);
+    }
+
+    constructor(nameOrExisting: string | Mongo.Collection<T>, options?: ConstructorOptions) {
+      if (typeof nameOrExisting === 'string') {
+        this._collection = new Mongo.Collection<T>(nameOrExisting, options);
+      } else {
+        this._collection = nameOrExisting;
+      }
     }
 
     get collection(): Mongo.Collection<T> {

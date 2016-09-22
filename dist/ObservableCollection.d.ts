@@ -20,7 +20,8 @@ export declare module MongoObservable {
     }
     class Collection<T> {
         private _collection;
-        constructor(name: string, options?: ConstructorOptions);
+        static fromExisting<T>(collection: Mongo.Collection<T>): Collection<T>;
+        constructor(nameOrExisting: string | Mongo.Collection<T>, options?: ConstructorOptions);
         readonly collection: Mongo.Collection<T>;
         allow(options: AllowDenyOptionsObject<T>): boolean;
         deny(options: AllowDenyOptionsObject<T>): boolean;
