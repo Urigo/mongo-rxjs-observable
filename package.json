@@ -55,7 +55,7 @@
     "tslint": "4.0.2",
     "typescript": "2.1.4",
     "validate-commit-msg": "2.8.2",
-    "zone.js": "^0.6.22"
+    "zone.js": "^0.7.0"
   },
   "greenkeeper": {
     "ignore": [
