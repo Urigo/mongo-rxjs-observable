@@ -1,4 +1,3 @@
-/// <reference types="chai" />
 /// <reference types="@types/meteor" />
 import { Observable } from 'rxjs';
 import { ObservableCursor } from './ObservableCursor';
