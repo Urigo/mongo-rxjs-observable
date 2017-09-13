@@ -48,7 +48,7 @@
     "conventional-changelog": "1.1.0",
     "conventional-changelog-cli": "1.2.0",
     "jsdoc-to-markdown": "2.0.1",
-    "rollup": "0.40.1",
+    "rollup": "0.41.2",
     "rxjs": "^5.0.1",
     "tslint": "4.3.0",
     "typescript": "2.1.4",
