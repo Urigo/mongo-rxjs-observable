@@ -5,13 +5,13 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
-    "es6-shim": "^0.35.3",
+    "babel-runtime": "6.26.0",
+    "es6-shim": "0.35.3",
     "meteor-rxjs": "file:..",
     "rxjs": "5.4.3",
     "zone.js": "0.8.17"
   },
   "devDependencies": {
-    "linklocal": "^2.8.1"
+    "linklocal": "2.8.1"
   }
 }
