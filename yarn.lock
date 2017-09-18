@@ -12,9 +12,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/meteor@1.4.6":
-  version "1.4.6"
-  resolved "https://registry.yarnpkg.com/@types/meteor/-/meteor-1.4.6.tgz#eca1b7f8933fdaf8fc77a3e0c426bb6889fb1652"
+"@types/meteor@1.4.7":
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/@types/meteor/-/meteor-1.4.7.tgz#f8b610dd8c5167ebf1c0232d6f981458088ca1c7"
   dependencies:
     "@types/connect" "*"
 

@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@types/chai": "4.0.4",
-    "@types/meteor": "1.4.6",
+    "@types/meteor": "1.4.7",
     "@types/mocha": "2.2.43",
     "@types/underscore": "1.8.3",
     "conventional-changelog": "1.1.0",
