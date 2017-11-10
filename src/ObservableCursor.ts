@@ -40,7 +40,9 @@ export class ObservableCursor<T> extends Observable<T[]> {
         this._hCursor = this._observeCursor(cursor);
       }
 
-      Meteor.setTimeout(() => {
+      const setTimeoutFn = Meteor.isClient ? setTimeout : Meteor.setTimeout;
+
+      setTimeoutFn(() => {
         if (this._isDataInitinialized) {
           observer.next(this._data);
         } else if (cursor.count() === 0) {

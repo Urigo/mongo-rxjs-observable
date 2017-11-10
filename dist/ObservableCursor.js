@@ -24,7 +24,9 @@ var ObservableCursor = /** @class */ (function (_super) {
             if (!_this._hCursor) {
                 _this._hCursor = _this._observeCursor(cursor);
             }
-            Meteor.setTimeout(function () {
+            var setTimeoutFn = Meteor.isClient ? setTimeout : Meteor.setTimeout;
+            
+            setTimeoutFn(function () {
                 if (_this._isDataInitinialized) {
                     observer.next(_this._data);
                 }
