@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@types/chai": "3.5.2",
-    "@types/mocha": "2.2.43",
+    "@types/mocha": "2.2.46",
     "chai": "3.5.0",
     "chai-spies": "0.7.1"
   },
