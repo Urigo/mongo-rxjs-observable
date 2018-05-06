@@ -47,7 +47,7 @@
     "@types/underscore": "1.8.3",
     "conventional-changelog": "1.1.0",
     "conventional-changelog-cli": "1.2.0",
-    "jsdoc-to-markdown": "3.0.0",
+    "jsdoc-to-markdown": "4.0.1",
     "rollup": "0.49.3",
     "rxjs": "6.0.0",
     "rxjs-compat": "6.0.0",
