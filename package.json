@@ -1,6 +1,6 @@
 {
   "name": "meteor-rxjs",
-  "version": "0.4.11",
+  "version": "0.4.14",
   "description": "Use Meteor API in RxJS style",
   "keywords": [
     "rxjs",
@@ -16,21 +16,21 @@
   "scripts": {
     "changelog": "$(npm bin)/conventional-changelog -p meteor-rxjs -i CHANGELOG.md -s -r 0",
     "docs": "./generate-docs.sh",
-    "prebuild": "npm run lint",
-    "build": "npm run build-only && npm run bundle && npm run docs",
-    "prepublish": "npm run build",
+    "prebuild": "meteor npm run lint",
+    "build": "meteor npm run build-only && meteor npm run bundle && meteor npm run docs",
+    "prepublish": "meteor npm run build",
     "build-only": "tsc || echo not ok",
-    "pretest": "cd tests && rm -rf node_modules && npm install",
-    "test-ci": "npm run pretest && cd tests && meteor test --once --driver-package dispatch:mocha-phantomjs",
-    "test": "cd tests && meteor test --driver-package practicalmeteor:mocha",
+    "pretest": "rm -rf node_modules && cd tests && npm install",
+    "test-ci": "meteor npm run pretest && cd tests && TEST_BROWSER_DRIVER=chrome meteor test --once --driver-package ardatan:mocha",
+    "test": "cd tests && TEST_BROWSER_DRIVER=chrome meteor test --driver-package ardatan:mocha",
     "lint": "tslint src/**/*.ts",
     "bundle": "rollup -i ./dist/index.js -o ./dist/bundles/index.umd.js -n meteor.rxjs -c rollup.config.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Urigo/mongo-rxjs-observable.git"
+    "url": "git+https://github.com/Urigo/meteor-rxjs.git"
   },
-  "author": "Angular2-Meteor (https://github.com/Urigo/angular2-meteor)",
+  "author": "Angular-Meteor (https://github.com/Urigo/angular-meteor)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Urigo/mongo-rxjs-observable/issues"
@@ -38,19 +38,15 @@
   "homepage": "http://www.angular-meteor.com",
   "peerDependencies": {
     "@types/meteor": "^1.4.6",
-    "rxjs": "^5.4.3 || ^6.0.0"
+    "rxjs": "^6.0.0"
   },
   "devDependencies": {
-    "@types/chai": "4.0.4",
     "@types/meteor": "1.4.14",
-    "@types/mocha": "2.2.43",
-    "@types/underscore": "1.8.3",
     "conventional-changelog": "1.1.0",
     "conventional-changelog-cli": "1.2.0",
     "jsdoc-to-markdown": "3.0.0",
-    "rollup": "0.49.3",
+    "rollup": "0.59.4",
     "rxjs": "6.0.0",
-    "rxjs-compat": "6.0.0",
     "tslint": "5.7.0",
     "typescript": "2.7.2",
     "zone.js": "0.8.20"

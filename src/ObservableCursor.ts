@@ -1,8 +1,6 @@
-import { Observable ,  Subscriber ,  Subject } from 'rxjs';
+import { Observable, Subscriber, Subject } from 'rxjs';
 
 import { gZone, forkZone, removeObserver } from './utils';
-
-declare let _;
 
 export class ObservableCursor<T> extends Observable<T[]> {
   private _zone: Zone;
@@ -54,7 +52,11 @@ export class ObservableCursor<T> extends Observable<T[]> {
       };
     });
 
-    _.extend(this, _.omit(cursor, 'count', 'map'));
+    for (const key in cursor) {
+      if (key !== 'count' && key !== 'map') {
+        this[key] = cursor[key];
+      }
+    }
 
     this._cursor = cursor;
     this._zone = forkZone();

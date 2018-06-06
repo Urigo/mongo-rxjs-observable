@@ -1,7 +1,7 @@
-import {chai} from 'meteor/practicalmeteor:chai';
-import {sinon} from 'meteor/practicalmeteor:sinon';
-import {MongoObservable, ObservableCursor} from 'meteor-rxjs';
-import {Observable} from 'rxjs';
+import * as chai from 'chai';
+import * as sinon from 'sinon';
+import { MongoObservable, ObservableCursor } from 'meteor-rxjs';
+import { Observable, isObservable } from 'rxjs';
 
 const expect = chai.expect;
 
@@ -11,7 +11,7 @@ describe('MongoObservable methods bridge', () => {
 
   it('Should return RxJS Observable object when using "find"', () => {
     let findResult = observable.find({});
-    expect(findResult instanceof Observable).to.equal(true);
+    expect(isObservable(findResult)).to.equal(true);
   });
 
   it('Should wrap existing collection', () => {

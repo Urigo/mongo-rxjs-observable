@@ -2,7 +2,10 @@ export default {
   output: {
     format: 'umd'
   },
+  external: ['rxjs'],
   globals: {
-    'rxjs': 'rxjs'
+    'meteor/meteor': 'Package.meteor',
+    'meteor/mongo': 'Package.mongo',
+    'meteor/tracker': 'Package.tracker'
   }
 };

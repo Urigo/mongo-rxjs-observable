@@ -1,8 +1,10 @@
 import { Observable } from 'rxjs';
 import { isMeteorCallbacks, forkZone, removeObserver } from './utils';
-var liveSubscriptions = [];
+let liveSubscriptions = [];
 function throwInvalidCallback(method) {
-    throw new Error("Invalid " + method + " arguments:\n     your last param can't be a callback function,\n     please remove it and use \".subscribe\" of the Observable!");
+    throw new Error(`Invalid ${method} arguments:
+     your last param can't be a callback function,
+     please remove it and use ".subscribe" of the Observable!`);
 }
 /**
  * This is a class with static methods that wrap Meteor's API and return RxJS
@@ -14,9 +16,7 @@ function throwInvalidCallback(method) {
  * [Meteor.autorun](https://docs.meteor.com/api/tracker.html#Tracker-autorun)
  * and [Meteor.subscribe](https://docs.meteor.com/api/pubsub.html#Meteor-subscribe).
  */
-var MeteorObservable = /** @class */ (function () {
-    function MeteorObservable() {
-    }
+export class MeteorObservable {
     /**
      * Invokes a [Meteor Method](https://docs.meteor.com/api/methods.html)
      * defined on the server, passing any number of arguments. This method has
@@ -47,28 +47,24 @@ var MeteorObservable = /** @class */ (function () {
      *     }
      *  }
      */
-    MeteorObservable.call = function (name) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        var lastParam = args[args.length - 1];
+    static call(name, ...args) {
+        const lastParam = args[args.length - 1];
         if (isMeteorCallbacks(lastParam)) {
             throwInvalidCallback('MeteorObservable.call');
         }
-        var zone = forkZone();
-        return Observable.create(function (observer) {
-            Meteor.call.apply(Meteor, [name].concat(args.concat([
-                function (error, result) {
-                    zone.run(function () {
+        let zone = forkZone();
+        return Observable.create((observer) => {
+            Meteor.call(name, ...args.concat([
+                (error, result) => {
+                    zone.run(() => {
                         error ? observer.error(error) :
                             observer.next(result);
                         observer.complete();
                     });
                 }
-            ])));
+            ]));
         });
-    };
+    }
     /**
      * When you subscribe to a collection, it tells the server to send records to
      * the client. This method has the same signature as
@@ -125,39 +121,35 @@ var MeteorObservable = /** @class */ (function () {
      *
      *  @see {@link http://docs.meteor.com/api/pubsub.html|Publications in Meteor documentation}
      */
-    MeteorObservable.subscribe = function (name) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        var lastParam = args[args.length - 1];
+    static subscribe(name, ...args) {
+        let lastParam = args[args.length - 1];
         if (isMeteorCallbacks(lastParam)) {
             throwInvalidCallback('MeteorObservable.subscribe');
         }
-        var zone = forkZone();
-        var observers = [];
-        var subscribe = function () {
-            return Meteor.subscribe.apply(Meteor, [name].concat(args.concat([{
-                    onError: function (error) {
-                        zone.run(function () {
-                            observers.forEach(function (observer) { return observer.error(error); });
+        let zone = forkZone();
+        let observers = [];
+        let subscribe = () => {
+            return Meteor.subscribe(name, ...args.concat([{
+                    onError: (error) => {
+                        zone.run(() => {
+                            observers.forEach(observer => observer.error(error));
                         });
                     },
-                    onReady: function () {
-                        zone.run(function () {
-                            observers.forEach(function (observer) { return observer.next(); });
+                    onReady: () => {
+                        zone.run(() => {
+                            observers.forEach(observer => observer.next());
                         });
                     }
                 }
-            ])));
+            ]));
         };
-        var subHandler = null;
-        return Observable.create(function (observer) {
+        let subHandler = null;
+        return Observable.create((observer) => {
             observers.push(observer);
             // Execute subscribe lazily.
             if (subHandler === null) {
                 subHandler = subscribe();
-                if (liveSubscriptions.find(function (sub) { return sub === subHandler.subscriptionId; })) {
+                if (liveSubscriptions.find(sub => sub === subHandler.subscriptionId)) {
                     // subscription already exists, call observer.next() since Meteor won't.
                     observer.next();
                 }
@@ -165,10 +157,10 @@ var MeteorObservable = /** @class */ (function () {
                     liveSubscriptions.push(subHandler.subscriptionId);
                 }
             }
-            return function () {
-                removeObserver(observers, observer, function () {
+            return () => {
+                removeObserver(observers, observer, () => {
                     // remove subscription from liveSubscriptions list
-                    var i = liveSubscriptions.findIndex(function (sub) { return sub === subHandler.subscriptionId; });
+                    let i = liveSubscriptions.findIndex(sub => sub === subHandler.subscriptionId);
                     if (i > -1) {
                         liveSubscriptions.splice(i, 1);
                     }
@@ -176,7 +168,7 @@ var MeteorObservable = /** @class */ (function () {
                 });
             };
         });
-    };
+    }
     /**
      * Allows you to run a function every time there is a change is a reactive
      * data sources. This method has the same signature as
@@ -199,29 +191,27 @@ var MeteorObservable = /** @class */ (function () {
      *     }
      *  }
      */
-    MeteorObservable.autorun = function () {
-        var zone = forkZone();
-        var observers = [];
-        var autorun = function () {
-            return Tracker.autorun(function (computation) {
-                zone.run(function () {
-                    observers.forEach(function (observer) { return observer.next(computation); });
+    static autorun() {
+        let zone = forkZone();
+        let observers = [];
+        let autorun = () => {
+            return Tracker.autorun((computation) => {
+                zone.run(() => {
+                    observers.forEach(observer => observer.next(computation));
                 });
             });
         };
-        var handler = null;
-        return Observable.create(function (observer) {
+        let handler = null;
+        return Observable.create((observer) => {
             observers.push(observer);
             // Execute autorun lazily.
             if (handler === null) {
                 handler = autorun();
             }
-            return function () {
-                removeObserver(observers, observer, function () { return handler.stop(); });
+            return () => {
+                removeObserver(observers, observer, () => handler.stop());
             };
         });
-    };
-    return MeteorObservable;
-}());
-export { MeteorObservable };
+    }
+}
 //# sourceMappingURL=MeteorObservable.js.map

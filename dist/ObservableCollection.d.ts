@@ -1,10 +1,5 @@
 import { Observable } from 'rxjs';
 import { ObservableCursor } from './ObservableCursor';
-import Selector = Mongo.Selector;
-import ObjectID = Mongo.ObjectID;
-import SortSpecifier = Mongo.SortSpecifier;
-import FieldSpecifier = Mongo.FieldSpecifier;
-import Modifier = Mongo.Modifier;
 export declare module MongoObservable {
     interface ConstructorOptions {
         connection?: Object;
@@ -93,16 +88,16 @@ export declare module MongoObservable {
         /**
          *  Remove documents from the collection.
          *
-         *  @param {Collection~MongoQuerySelector} selector - Specifies which documents to modify
+         *  @param {Collection~MongoQueryMongo.Selector} selector - Specifies which documents to modify
          *  @returns {Observable<Number>} Observable which completes with the number of affected rows
          *
          * @see {@link https://docs.meteor.com/api/collections.html#Mongo-Collection-remove|remove on Meteor documentation}
          */
-        remove(selector: Selector | ObjectID | string): Observable<number>;
+        remove(selector: Mongo.Selector | Mongo.ObjectID | string): Observable<number>;
         /**
          *  Modify one or more documents in the collection.
          *
-         *  @param {Collection~MongoQuerySelector} selector - Specifies which documents to modify
+         *  @param {Collection~MongoQueryMongo.Selector} selector - Specifies which documents to modify
          *  @param {Modifier} modifier - Specifies how to modify the documents
          *  @param {MongoUpdateOptions} options - Update options
          *  first argument and, if no error, the number of affected documents as the second
@@ -110,14 +105,14 @@ export declare module MongoObservable {
          *
          * @see {@link https://docs.meteor.com/api/collections.html#Mongo-Collection-update|update on Meteor documentation}
          */
-        update(selector: Selector | ObjectID | string, modifier: Modifier, options?: {
+        update(selector: Mongo.Selector | Mongo.ObjectID | string, modifier: Mongo.Modifier, options?: {
             multi?: boolean;
             upsert?: boolean;
         }): Observable<number>;
         /**
          *  Finds the first document that matches the selector, as ordered by sort and skip options.
          *
-         *  @param {Collection~MongoQuerySelector} selector - Specifies which documents to modify
+         *  @param {Collection~MongoQueryMongo.Selector} selector - Specifies which documents to modify
          *  @param {Modifier} modifier - Specifies how to modify the documents
          *  @param {MongoUpsertOptions} options - Upsert options
          *  first argument and, if no error, the number of affected documents as the second.
@@ -126,13 +121,13 @@ export declare module MongoObservable {
          *
          * @see {@link https://docs.meteor.com/api/collections.html#Mongo-Collection-upsert|upsert on Meteor documentation}
          */
-        upsert(selector: Selector | ObjectID | string, modifier: Modifier, options?: {
+        upsert(selector: Mongo.Selector | Mongo.ObjectID | string, modifier: Mongo.Modifier, options?: {
             multi?: boolean;
         }): Observable<number>;
         /**
          *  Method has the same notation as Mongo.Collection.find, only returns Observable.
          *
-         *  @param {Collection~MongoQuerySelector} selector - A query describing the documents to find
+         *  @param {Collection~MongoQueryMongo.Selector} selector - A query describing the documents to find
          *  @param {Collection~MongoQueryOptions} options - Query options, such as sort, limit, etc.
          *  @returns {ObservableCursor<T>} RxJS Observable wrapped with Meteor features.
          *  @example <caption>Using Angular2 Component</caption>
@@ -148,27 +143,27 @@ export declare module MongoObservable {
          *
          * @see {@link https://docs.meteor.com/api/collections.html#Mongo-Collection-find|find on Meteor documentation}
          */
-        find(selector?: Selector | ObjectID | string, options?: {
-            sort?: SortSpecifier;
+        find(selector?: Mongo.Selector | Mongo.ObjectID | string, options?: {
+            sort?: Mongo.SortSpecifier;
             skip?: number;
             limit?: number;
-            fields?: FieldSpecifier;
+            fields?: Mongo.FieldSpecifier;
             reactive?: boolean;
             transform?: Function;
         }): ObservableCursor<T>;
         /**
          *  Finds the first document that matches the selector, as ordered by sort and skip options.
          *
-         *  @param {Collection~MongoQuerySelector} selector - A query describing the documents to find
+         *  @param {Collection~MongoQueryMongo.Selector} selector - A query describing the documents to find
          *  @param {Collection~MongoQueryOptions} options - Query options, such as sort, limit, etc.
          *  @returns {any} The first object, or `undefined` in case of non-existing object.
          *
          * @see {@link https://docs.meteor.com/api/collections.html#Mongo-Collection-findOne|findOne on Meteor documentation}
          */
-        findOne(selector?: Selector | ObjectID | string, options?: {
-            sort?: SortSpecifier;
+        findOne(selector?: Mongo.Selector | Mongo.ObjectID | string, options?: {
+            sort?: Mongo.SortSpecifier;
             skip?: number;
-            fields?: FieldSpecifier;
+            fields?: Mongo.FieldSpecifier;
             reactive?: boolean;
             transform?: Function;
         }): T;

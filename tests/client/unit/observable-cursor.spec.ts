@@ -1,10 +1,7 @@
-import {chai} from 'meteor/practicalmeteor:chai';
-import {sinon} from 'meteor/practicalmeteor:sinon';
-import {Observable} from 'rxjs';
-import {ObservableCursor, MongoObservable} from 'meteor-rxjs';
-
-
-
+import * as chai from 'chai';
+import * as sinon from 'sinon';
+import { Observable, isObservable } from 'rxjs';
+import { ObservableCursor, MongoObservable } from 'meteor-rxjs';
 
 const expect = chai.expect;
 
@@ -32,7 +29,7 @@ describe('ObservableCursor', function () {
   });
 
   it('Should wrap the Mongo.Cursor and return RxJS Observable', () => {
-    expect(observable instanceof Observable).to.equal(true);
+    expect(isObservable(observable)).to.equal(true);
   });
 
   it('Should not use the actual Cursor "observeChanges" method w/o Observable subscription', () => {
@@ -69,7 +66,7 @@ describe('ObservableCursor', function () {
   });
 
   it('Should trigger subscription callback when adding data to the collection', () => {
-    let newDoc = {name: 'newDoc'};
+    let newDoc = { name: 'newDoc' };
     let subHandler;
     let callback = docs => {
       let inserted = docs[0];
@@ -83,10 +80,10 @@ describe('ObservableCursor', function () {
   });
 
   it('Should trigger subscription callback when moving items in the collection', (done) => {
-    cursor = collection.find({}, {sort: {name: 1}});
+    cursor = collection.find({}, { sort: { name: 1 } });
     observable = ObservableCursor.create(cursor);
 
-    let newDoc = {name: 'ZZZZ'};
+    let newDoc = { name: 'ZZZZ' };
     let subHandler;
     let count = 0;
 
@@ -111,7 +108,7 @@ describe('ObservableCursor', function () {
       name: 'BBBB'
     });
 
-    collection.update({_id: objectId}, { $set: {name: 'AAAA'} });
+    collection.update({ _id: objectId }, { $set: { name: 'AAAA' } });
   });
 
   it('Should trigger callback twice when inserting a doc and then removing it', () => {
@@ -119,14 +116,14 @@ describe('ObservableCursor', function () {
     let subHandler;
     let callback = docs => {
       count++;
-      if (count == 2) {
+      if (count === 2) {
         expect(docs.length).to.equal(0);
         subHandler.unsubscribe();
       }
     };
     let spy = sinon.spy(callback);
-    let subHandler = observable.subscribe(spy);
-    let idToRemove = collection.insert({test: true});
+    subHandler = observable.subscribe(spy);
+    let idToRemove = collection.insert({ test: true });
     collection.remove(idToRemove);
     expect(spy.calledTwice).to.be.true;
   });
@@ -135,11 +132,11 @@ describe('ObservableCursor', function () {
     let count = 0;
     let callback = docs => {
       count++;
-      if (count == 1) {
+      if (count === 1) {
         expect(docs[0].test).to.equal(true);
       }
 
-      if (count == 2) {
+      if (count === 2) {
         expect(docs[0].test).to.equal(false);
         subHandler.unsubscribe();
         done();
@@ -148,17 +145,17 @@ describe('ObservableCursor', function () {
     let spy = sinon.spy(callback);
 
     let subHandler = observable.subscribe(spy);
-    let idToUpdate = collection.insert({test: true});
-    collection.update({_id: idToUpdate}, {$set: {test: false}});
+    let idToUpdate = collection.insert({ test: true });
+    collection.update({ _id: idToUpdate }, { $set: { test: false } });
     expect(spy.calledTwice).to.be.true;
   });
 
   it('Should stop Mongo cursor when the last subscription unsubscribes', () => {
     let stopSpy = sinon.spy();
-    let spy = sinon.stub(cursor, 'observeChanges', () => {
+    let spy = sinon.stub(cursor, 'observeChanges').callsFake(() => {
       return {
         stop: stopSpy
-      }
+      };
     });
 
     let subHandler = observable.subscribe();
@@ -168,13 +165,8 @@ describe('ObservableCursor', function () {
     spy.restore();
   });
 
-  it('RxJS operators should persist', () => {
-    expect(observable.count).to.equal(Observable.prototype.count);
-    expect(observable.map).to.equal(Observable.prototype.map);
-  });
-
   it('Should trigger collectionCount when adding item', () => {
-    let newDoc = {name: 'newDoc'};
+    let newDoc = { name: 'newDoc' };
     let subHandler, subCountHandler;
     let callback = count => {
       expect(count).to.equal(1);
@@ -188,15 +180,14 @@ describe('ObservableCursor', function () {
   });
 
   it('Should trigger collectionCount when adding and removing items', (done) => {
-    let newDoc = {name: 'newDoc'};
+    let newDoc = { name: 'newDoc' };
     let subHandler, subCountHandler;
     let c = 0;
 
     let callback = count => {
       if (c === 0) {
         expect(count).to.equal(1);
-      }
-      else if (c === 1) {
+      } else if (c === 1) {
         expect(count).to.equal(0);
         subHandler.unsubscribe();
         subCountHandler.unsubscribe();
@@ -209,7 +200,7 @@ describe('ObservableCursor', function () {
     subHandler = observable.subscribe();
     subCountHandler = observable.collectionCount().subscribe(callback);
     let id = collection.insert(newDoc);
-    collection.remove({_id: id});
+    collection.remove({ _id: id });
   });
 
   it('Multiple subscription for the same Observable should replay last value', () => {
@@ -219,11 +210,11 @@ describe('ObservableCursor', function () {
     let spyCb1 = sinon.spy();
     let spyCb2 = sinon.spy();
     let firstSubscriptionHandler = observable.subscribe(spyCb1);
-    wrappedCollection.insert({test: 1});
-    wrappedCollection.insert({test: 2});
-    wrappedCollection.insert({test: 3});
+    wrappedCollection.insert({ test: 1 });
+    wrappedCollection.insert({ test: 2 });
+    wrappedCollection.insert({ test: 3 });
     let secondSubscriptionHandler = observable.subscribe(spyCb2);
-    wrappedCollection.insert({test: 4});
+    wrappedCollection.insert({ test: 4 });
 
     expect(spyCb1.callCount).to.equal(4);
     expect(spyCb2.callCount).to.equal(1);

@@ -26,7 +26,6 @@ T is a generic type - should be used with the type of the objects inside the col
         * [.findOne(selector, options)](#Collection+findOne) ⇒ <code>any</code>
     * _inner_
         * [~MongoQueryOptions](#Collection..MongoQueryOptions) : <code>Object</code>
-        * [~MongoQuerySelector](#Collection..MongoQuerySelector) : <code>Mongo.Selector</code> \| <code>Mongo.ObjectID</code> \| <code>string</code>
         * [~MongoUpsertOptions](#Collection..MongoUpsertOptions) : <code>Object</code>
         * [~MongoUpdateOptions](#Collection..MongoUpdateOptions) : <code>Object</code>
 
@@ -102,7 +101,7 @@ Remove documents from the collection.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| selector | [<code>MongoQuerySelector</code>](#Collection..MongoQuerySelector) | Specifies which documents to modify |
+| selector | [<code>Selector</code>](#Collection..MongoQueryMongo.Selector) | Specifies which documents to modify |
 
 <a name="Collection+update"></a>
 
@@ -115,7 +114,7 @@ Modify one or more documents in the collection.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| selector | [<code>MongoQuerySelector</code>](#Collection..MongoQuerySelector) | Specifies which documents to modify |
+| selector | [<code>Selector</code>](#Collection..MongoQueryMongo.Selector) | Specifies which documents to modify |
 | modifier | <code>Modifier</code> | Specifies how to modify the documents |
 | options | <code>MongoUpdateOptions</code> | Update options  first argument and, if no error, the number of affected documents as the second |
 
@@ -131,7 +130,7 @@ Finds the first document that matches the selector, as ordered by sort and skip 
 
 | Param | Type | Description |
 | --- | --- | --- |
-| selector | [<code>MongoQuerySelector</code>](#Collection..MongoQuerySelector) | Specifies which documents to modify |
+| selector | [<code>Selector</code>](#Collection..MongoQueryMongo.Selector) | Specifies which documents to modify |
 | modifier | <code>Modifier</code> | Specifies how to modify the documents |
 | options | <code>MongoUpsertOptions</code> | Upsert options  first argument and, if no error, the number of affected documents as the second. |
 
@@ -146,7 +145,7 @@ Method has the same notation as Mongo.Collection.find, only returns Observable.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| selector | [<code>MongoQuerySelector</code>](#Collection..MongoQuerySelector) | A query describing the documents to find |
+| selector | [<code>Selector</code>](#Collection..MongoQueryMongo.Selector) | A query describing the documents to find |
 | options | [<code>MongoQueryOptions</code>](#Collection..MongoQueryOptions) | Query options, such as sort, limit, etc. |
 
 **Example** *(Using Angular2 Component)*  
@@ -172,7 +171,7 @@ Finds the first document that matches the selector, as ordered by sort and skip 
 
 | Param | Type | Description |
 | --- | --- | --- |
-| selector | [<code>MongoQuerySelector</code>](#Collection..MongoQuerySelector) | A query describing the documents to find |
+| selector | [<code>Selector</code>](#Collection..MongoQueryMongo.Selector) | A query describing the documents to find |
 | options | [<code>MongoQueryOptions</code>](#Collection..MongoQueryOptions) | Query options, such as sort, limit, etc. |
 
 <a name="Collection..MongoQueryOptions"></a>
@@ -191,12 +190,6 @@ An options object for MongoDB queries.
 | reactive | <code>Boolean</code> | (Client only) Default true; pass false to disable reactivity |
 | transform | <code>function</code> | Overrides transform on the Collection for this cursor. Pass null to disable transformation. |
 
-<a name="Collection..MongoQuerySelector"></a>
-
-### Collection~MongoQuerySelector : <code>Mongo.Selector</code> \| <code>Mongo.ObjectID</code> \| <code>string</code>
-A MongoDB query selector representation.
-
-**Kind**: inner typedef of [<code>Collection</code>](#Collection)  
 <a name="Collection..MongoUpsertOptions"></a>
 
 ### Collection~MongoUpsertOptions : <code>Object</code>

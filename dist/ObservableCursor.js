@@ -1,49 +1,41 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 import { Observable, Subject } from 'rxjs';
 import { gZone, forkZone, removeObserver } from './utils';
-var ObservableCursor = /** @class */ (function (_super) {
-    __extends(ObservableCursor, _super);
+export class ObservableCursor extends Observable {
     /**
      * @constructor
      * @extends Observable
      * @param {Mongo.Cursor<T>} cursor - The Mongo.Cursor to wrap.
      */
-    function ObservableCursor(cursor) {
-        var _this = _super.call(this, function (observer) {
-            _this._observers.push(observer);
-            if (!_this._hCursor) {
-                _this._hCursor = _this._observeCursor(cursor);
+    constructor(cursor) {
+        super((observer) => {
+            this._observers.push(observer);
+            if (!this._hCursor) {
+                this._hCursor = this._observeCursor(cursor);
             }
-            Meteor.setTimeout(function () {
-                if (_this._isDataInitinialized) {
-                    observer.next(_this._data);
+            Meteor.setTimeout(() => {
+                if (this._isDataInitinialized) {
+                    observer.next(this._data);
                 }
                 else if (cursor.count() === 0) {
-                    _this._isDataInitinialized = true;
-                    observer.next(_this._data);
+                    this._isDataInitinialized = true;
+                    observer.next(this._data);
                 }
             }, 0);
-            return function () {
-                removeObserver(_this._observers, observer, function () { return _this.stop(); });
+            return () => {
+                removeObserver(this._observers, observer, () => this.stop());
             };
-        }) || this;
-        _this._data = [];
-        _this._observers = [];
-        _this._countObserver = new Subject();
-        _this._isDataInitinialized = false;
-        _.extend(_this, _.omit(cursor, 'count', 'map'));
-        _this._cursor = cursor;
-        _this._zone = forkZone();
-        return _this;
+        });
+        this._data = [];
+        this._observers = [];
+        this._countObserver = new Subject();
+        this._isDataInitinialized = false;
+        for (const key in cursor) {
+            if (key !== 'count' && key !== 'map') {
+                this[key] = cursor[key];
+            }
+        }
+        this._cursor = cursor;
+        this._zone = forkZone();
     }
     /**
      *  Static method which creates an ObservableCursor from Mongo.Cursor.
@@ -54,20 +46,16 @@ var ObservableCursor = /** @class */ (function (_super) {
      *  @static
      *  @returns {ObservableCursor} Wrapped Cursor.
      */
-    ObservableCursor.create = function (cursor) {
+    static create(cursor) {
         return new ObservableCursor(cursor);
-    };
-    Object.defineProperty(ObservableCursor.prototype, "cursor", {
-        /**
-         * Returns the actual Mongo.Cursor that wrapped by current ObservableCursor instance.
-         * @return {Mongo.Cursor<T>} The actual MongoDB Cursor.
-         */
-        get: function () {
-            return this._cursor;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    }
+    /**
+     * Returns the actual Mongo.Cursor that wrapped by current ObservableCursor instance.
+     * @return {Mongo.Cursor<T>} The actual MongoDB Cursor.
+     */
+    get cursor() {
+        return this._cursor;
+    }
     /**
      * A wrapper for Mongo.Cursor.count() method - returns an Observable of number, which
      * triggers each time there is a change in the collection, and exposes the number of
@@ -75,102 +63,97 @@ var ObservableCursor = /** @class */ (function (_super) {
      * @returns {Observable} Observable which trigger the callback when the
      * count of the object changes.
      */
-    ObservableCursor.prototype.collectionCount = function () {
+    collectionCount() {
         return this._countObserver.asObservable();
-    };
+    }
     /**
      * Stops the observation on the cursor.
      */
-    ObservableCursor.prototype.stop = function () {
-        var _this = this;
-        this._zone.run(function () {
-            _this._runComplete();
+    stop() {
+        this._zone.run(() => {
+            this._runComplete();
         });
         if (this._hCursor) {
             this._hCursor.stop();
         }
         this._data = [];
         this._hCursor = null;
-    };
+    }
     /**
      * Clears the Observable definition.
      * Use this method only when the Observable is still cold, and there are no active subscriptions yet.
      */
-    ObservableCursor.prototype.dispose = function () {
+    dispose() {
         this._observers = null;
         this._cursor = null;
-    };
+    }
     /**
      * Return all matching documents as an Array.
      *
      * @return {Array<T>} The array with the matching documents.
      */
-    ObservableCursor.prototype.fetch = function () {
+    fetch() {
         return this._cursor.fetch();
-    };
+    }
     /**
      * Watch a query. Receive callbacks as the result set changes.
      * @param {Mongo.ObserveCallbacks} callbacks - The callbacks object.
      * @return {Meteor.LiveQueryHandle} The array with the matching documents.
      */
-    ObservableCursor.prototype.observe = function (callbacks) {
+    observe(callbacks) {
         return this._cursor.observe(callbacks);
-    };
+    }
     /**
      * Watch a query. Receive callbacks as the result set changes.
      * Only the differences between the old and new documents are passed to the callbacks.
      * @param {Mongo.ObserveChangesCallbacks} callbacks - The callbacks object.
      * @return {Meteor.LiveQueryHandle} The array with the matching documents.
      */
-    ObservableCursor.prototype.observeChanges = function (callbacks) {
+    observeChanges(callbacks) {
         return this._cursor.observeChanges(callbacks);
-    };
-    ObservableCursor.prototype._runComplete = function () {
+    }
+    _runComplete() {
         this._countObserver.complete();
-        this._observers.forEach(function (observer) {
+        this._observers.forEach(observer => {
             observer.complete();
         });
-    };
-    ObservableCursor.prototype._runNext = function (data) {
+    }
+    _runNext(data) {
         this._countObserver.next(this._data.length);
-        this._observers.forEach(function (observer) {
+        this._observers.forEach(observer => {
             observer.next(data);
         });
-    };
-    ObservableCursor.prototype._addedAt = function (doc, at, before) {
+    }
+    _addedAt(doc, at, before) {
         this._data.splice(at, 0, doc);
         this._handleChange();
-    };
-    ObservableCursor.prototype._changedAt = function (doc, old, at) {
+    }
+    _changedAt(doc, old, at) {
         this._data[at] = doc;
         this._handleChange();
-    };
-    ObservableCursor.prototype._removedAt = function (doc, at) {
+    }
+    _removedAt(doc, at) {
         this._data.splice(at, 1);
         this._handleChange();
-    };
-    ObservableCursor.prototype._movedTo = function (doc, fromIndex, toIndex) {
+    }
+    _movedTo(doc, fromIndex, toIndex) {
         this._data.splice(fromIndex, 1);
         this._data.splice(toIndex, 0, doc);
         this._handleChange();
-    };
-    ObservableCursor.prototype._handleChange = function () {
-        var _this = this;
+    }
+    _handleChange() {
         this._isDataInitinialized = true;
-        this._zone.run(function () {
-            _this._runNext(_this._data);
+        this._zone.run(() => {
+            this._runNext(this._data);
         });
-    };
-    ObservableCursor.prototype._observeCursor = function (cursor) {
-        var _this = this;
-        return gZone.run(function () { return cursor.observe({
-            addedAt: _this._addedAt.bind(_this),
-            changedAt: _this._changedAt.bind(_this),
-            movedTo: _this._movedTo.bind(_this),
-            removedAt: _this._removedAt.bind(_this)
-        }); });
-    };
-    return ObservableCursor;
-}(Observable));
-export { ObservableCursor };
+    }
+    _observeCursor(cursor) {
+        return gZone.run(() => cursor.observe({
+            addedAt: this._addedAt.bind(this),
+            changedAt: this._changedAt.bind(this),
+            movedTo: this._movedTo.bind(this),
+            removedAt: this._removedAt.bind(this)
+        }));
+    }
+}
 //# sourceMappingURL=ObservableCursor.js.map

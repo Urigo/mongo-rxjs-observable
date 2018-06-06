@@ -1,7 +1,8 @@
-import {chai} from 'meteor/practicalmeteor:chai';
-import {sinon} from 'meteor/practicalmeteor:sinon';
-import {MeteorObservable} from 'meteor-rxjs';
-import {Observable} from 'rxjs';
+import * as chai from 'chai';
+import * as sinon from 'sinon';
+import { Meteor } from 'meteor/meteor';
+import { MeteorObservable } from 'meteor-rxjs';
+import { Observable, isObservable } from 'rxjs';
 
 const expect = chai.expect;
 
@@ -9,7 +10,7 @@ describe('MeteorObservable', () => {
   describe('call', () => {
     it('Should return RxJS Observable when using "call"', () => {
       let returnValue = MeteorObservable.call('testMethod');
-      expect(returnValue instanceof Observable).to.equal(true);
+      expect(isObservable(returnValue)).to.equal(true);
     });
 
     it('Should NOT run the actual "call" method without subscribing to the result', () => {
@@ -39,13 +40,13 @@ describe('MeteorObservable', () => {
     it('Should trigger the RxJS Observable "error" callback when got the server error',
       (done) => {
         let subscriptionHandler = MeteorObservable.call('NON_EXISTING_METHOD').subscribe(null,
-         (e) => {
+          (e) => {
             expect(e instanceof Meteor.Error).to.equal(true);
             subscriptionHandler.unsubscribe();
             done();
           });
       });
-    });
+  });
 
   describe('subscribe', () => {
     function getSubsCount() {
@@ -54,7 +55,7 @@ describe('MeteorObservable', () => {
 
     it('Should return RxJS Observable when using "subscribe"', () => {
       let returnValue = MeteorObservable.subscribe('test');
-      expect(returnValue instanceof Observable).to.equal(true);
+      expect(isObservable(returnValue)).to.equal(true);
     });
 
     it('Should NOT run the actual "subscribe" method without subscribing to the result', () => {
@@ -93,7 +94,7 @@ describe('MeteorObservable', () => {
       done => {
         let baseCount = getSubsCount();
         let observable = MeteorObservable.subscribe('test');
-        let subHandler1 = observable.subscribe(() => {});
+        let subHandler1 = observable.subscribe(() => { });
         let subHandler2 = observable.subscribe(() => {
           expect(getSubsCount()).to.equal(baseCount + 1);
           subHandler1.unsubscribe();

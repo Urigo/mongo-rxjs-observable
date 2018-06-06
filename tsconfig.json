@@ -2,8 +2,11 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "module": "es2015",
-    "target": "es5",
-    "lib": ["es2015", "dom"],
+    "target": "es2015",
+    "lib": [
+      "es2015",
+      "dom"
+    ],
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true,
     "moduleResolution": "node",
@@ -14,9 +17,7 @@
     "rootDir": "./src",
     "types": [
       "zone.js",
-      "@types/chai",
-      "@types/meteor",
-      "@types/underscore"
+      "@types/meteor"
     ]
   },
   "files": [
