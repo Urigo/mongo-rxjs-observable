@@ -12,6 +12,10 @@
   dependencies:
     "@types/node" "*"
 
+"@types/estree@0.0.39":
+  version "0.0.39"
+  resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
+
 "@types/meteor@1.4.14":
   version "1.4.14"
   resolved "https://registry.yarnpkg.com/@types/meteor/-/meteor-1.4.14.tgz#b4b14b2e2a98b20cf2bd03a28bffa52ba40b8be2"
@@ -1092,9 +1096,12 @@ right-align@^0.1.1:
   dependencies:
     align-text "^0.1.1"
 
-rollup@0.49.3:
-  version "0.49.3"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.49.3.tgz#4cce32643dd8cf2154c69ff0e43470067db0adbf"
+rollup@0.68.2:
+  version "0.68.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.68.2.tgz#c26afb5d981ca7a1a32f76087dbde9dad4fcc653"
+  dependencies:
+    "@types/estree" "0.0.39"
+    "@types/node" "*"
 
 rxjs-compat@6.0.0:
   version "6.0.0"
