@@ -31,7 +31,7 @@
     "meteor-node-stubs": "0.2.3",
     "meteor-rxjs": "../../",
     "reflect-metadata": "0.1.8",
-    "rxjs": "5.0.0-beta.12",
+    "rxjs": "6.4.0",
     "zone.js": "0.6.26"
   }
 }

@@ -49,7 +49,7 @@
     "conventional-changelog-cli": "1.2.0",
     "jsdoc-to-markdown": "3.0.0",
     "rollup": "0.49.3",
-    "rxjs": "6.0.0",
+    "rxjs": "6.4.0",
     "rxjs-compat": "6.0.0",
     "tslint": "5.7.0",
     "typescript": "2.7.2",
