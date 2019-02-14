@@ -12,11 +12,12 @@
   dependencies:
     "@types/node" "*"
 
-"@types/meteor@1.4.14":
-  version "1.4.14"
-  resolved "https://registry.yarnpkg.com/@types/meteor/-/meteor-1.4.14.tgz#b4b14b2e2a98b20cf2bd03a28bffa52ba40b8be2"
+"@types/meteor@1.4.27":
+  version "1.4.27"
+  resolved "https://registry.yarnpkg.com/@types/meteor/-/meteor-1.4.27.tgz#d1057d0418fba0965b5a9e96fadecc4097600ec3"
   dependencies:
     "@types/connect" "*"
+    "@types/react" "*"
     "@types/underscore" "*"
 
 "@types/mocha@2.2.43":
@@ -26,6 +27,17 @@
 "@types/node@*":
   version "8.0.28"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.28.tgz#86206716f8d9251cf41692e384264cbd7058ad60"
+
+"@types/prop-types@*":
+  version "15.5.9"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.9.tgz#f2d14df87b0739041bc53a7d75e3d77d726a3ec0"
+
+"@types/react@*":
+  version "16.8.3"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.3.tgz#7b67956f682bea30a5a09b3242c0784ff196c848"
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
 
 "@types/underscore@*":
   version "1.8.8"
@@ -423,6 +435,10 @@ conventional-commits-parser@^1.0.0:
 core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
+
+csstype@^2.2.0:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.2.tgz#3043d5e065454579afc7478a18de41909c8a2f01"
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
