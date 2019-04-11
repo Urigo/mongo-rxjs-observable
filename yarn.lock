@@ -12,6 +12,10 @@
   dependencies:
     "@types/node" "*"
 
+"@types/estree@0.0.39":
+  version "0.0.39"
+  resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
+
 "@types/meteor@1.4.14":
   version "1.4.14"
   resolved "https://registry.yarnpkg.com/@types/meteor/-/meteor-1.4.14.tgz#b4b14b2e2a98b20cf2bd03a28bffa52ba40b8be2"
@@ -26,6 +30,10 @@
 "@types/node@*":
   version "8.0.28"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.28.tgz#86206716f8d9251cf41692e384264cbd7058ad60"
+
+"@types/node@^11.13.4":
+  version "11.13.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.4.tgz#f83ec3c3e05b174b7241fadeb6688267fe5b22ca"
 
 "@types/underscore@*":
   version "1.8.8"
@@ -51,6 +59,10 @@ acorn-jsx@^3.0.0:
 acorn@^3.0.4, acorn@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
+
+acorn@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.1.1.tgz#7d25ae05bb8ad1f9b699108e1094ecd7884adc1f"
 
 add-stream@^1.0.0:
   version "1.0.0"
@@ -1092,9 +1104,13 @@ right-align@^0.1.1:
   dependencies:
     align-text "^0.1.1"
 
-rollup@0.49.3:
-  version "0.49.3"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.49.3.tgz#4cce32643dd8cf2154c69ff0e43470067db0adbf"
+rollup@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.10.0.tgz#91d594aa4386c51ca0883ad4ef2050b469d3e8aa"
+  dependencies:
+    "@types/estree" "0.0.39"
+    "@types/node" "^11.13.4"
+    acorn "^6.1.1"
 
 rxjs-compat@6.0.0:
   version "6.0.0"
