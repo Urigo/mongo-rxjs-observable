@@ -37,6 +37,7 @@
   },
   "homepage": "http://www.angular-meteor.com",
   "peerDependencies": {
+    "lodash": "^4.17.15",
     "@types/meteor": "^1.4.6",
     "rxjs": "^5.4.3 || ^6.0.0"
   },
@@ -44,7 +45,7 @@
     "@types/chai": "4.0.4",
     "@types/meteor": "1.4.14",
     "@types/mocha": "2.2.43",
-    "@types/underscore": "1.8.3",
+    "@types/lodash": "4.14.142",
     "conventional-changelog": "1.1.0",
     "conventional-changelog-cli": "1.2.0",
     "jsdoc-to-markdown": "3.0.0",

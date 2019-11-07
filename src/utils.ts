@@ -1,6 +1,6 @@
 import { Subscriber } from 'rxjs';
 
-declare let _;
+import * as _ from 'lodash';
 
 export declare type CallbacksObject = {
   onReady?: Function;

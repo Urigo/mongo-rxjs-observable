@@ -2,7 +2,7 @@ import { Observable ,  Subscriber ,  Subject } from 'rxjs';
 
 import { gZone, forkZone, removeObserver } from './utils';
 
-declare let _;
+import * as _ from 'lodash';
 
 export class ObservableCursor<T> extends Observable<T[]> {
   private _zone: Zone;
