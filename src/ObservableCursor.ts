@@ -41,10 +41,10 @@ export class ObservableCursor<T> extends Observable<T[]> {
 
       Meteor.setTimeout(() => {
         if (this._isDataInitinialized) {
-          observer.next(this._data);
+          observer.next(_.clone(this._data));
         } else if (cursor.count() === 0) {
           this._isDataInitinialized = true;
-          observer.next(this._data);
+          observer.next(_.clone(this._data));
         }
       }, 0);
 
@@ -144,7 +144,7 @@ export class ObservableCursor<T> extends Observable<T[]> {
     this._countObserver.next(this._data.length);
 
     this._observers.forEach(observer => {
-      observer.next(data);
+      observer.next(_.clone(data));
     });
   }
 
@@ -173,7 +173,7 @@ export class ObservableCursor<T> extends Observable<T[]> {
     this._isDataInitinialized = true;
 
     this._zone.run(() => {
-      this._runNext(this._data);
+        this._runNext(this._data);
     });
   }
 

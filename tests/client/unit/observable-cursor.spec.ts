@@ -153,6 +153,33 @@ describe('ObservableCursor', function () {
     expect(spy.calledTwice).to.be.true;
   });
 
+  it('Should not alias subscription callback parameter', done => {
+    let count = 0;
+    let firstDocs;
+    let callback = docs => {
+      count++;
+
+      function valueSet(docs) { return docs.map((doc) => doc.value).sort().join(); }
+      if (count == 1) {
+        expect(valueSet(docs)).to.equal('1');
+        firstDocs = docs;
+      }
+
+      if (count == 2) {
+        expect(valueSet(firstDocs)).to.equal('1');
+        expect(valueSet(docs)).to.equal('1,2');
+        subHandler.unsubscribe();
+        done();
+      }
+    };
+    let spy = sinon.spy(callback);
+
+    let subHandler = observable.subscribe(spy);
+    collection.insert({value: 1});
+    collection.insert({value: 2});
+    expect(spy.calledTwice).to.be.true;
+  });
+
   it('Should stop Mongo cursor when the last subscription unsubscribes', () => {
     let stopSpy = sinon.spy();
     let spy = sinon.stub(cursor, 'observeChanges', () => {
