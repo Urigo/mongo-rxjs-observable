@@ -44,7 +44,7 @@
     "@types/chai": "4.0.4",
     "@types/meteor": "1.4.14",
     "@types/mocha": "2.2.43",
-    "@types/underscore": "1.8.3",
+    "@types/underscore": "1.8.14",
     "conventional-changelog": "1.1.0",
     "conventional-changelog-cli": "1.2.0",
     "jsdoc-to-markdown": "3.0.0",

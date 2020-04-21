@@ -39,9 +39,9 @@
   version "1.8.8"
   resolved "https://registry.yarnpkg.com/@types/underscore/-/underscore-1.8.8.tgz#510fe1ca5e7fa87fccd405b9a8b566d420bc3d1b"
 
-"@types/underscore@1.8.3":
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/@types/underscore/-/underscore-1.8.3.tgz#d3cb512dd3dde32b2bbba4be0ca68bd3dad4a1f5"
+"@types/underscore@1.8.14":
+  version "1.8.14"
+  resolved "https://registry.yarnpkg.com/@types/underscore/-/underscore-1.8.14.tgz#bf8f24950e6705e5150756a5947dac76e5dce2c0"
 
 JSONStream@^1.0.4:
   version "1.2.1"
