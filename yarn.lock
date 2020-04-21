@@ -1112,9 +1112,9 @@ rollup@1.10.0:
     "@types/node" "^11.13.4"
     acorn "^6.1.1"
 
-rxjs-compat@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/rxjs-compat/-/rxjs-compat-6.0.0.tgz#2496403f74042d07899faeeac0bd703e4bce6710"
+rxjs-compat@6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/rxjs-compat/-/rxjs-compat-6.4.0.tgz#800923c15697948e1f30f18c531b12b49451c75c"
 
 rxjs@6.0.0:
   version "6.0.0"
