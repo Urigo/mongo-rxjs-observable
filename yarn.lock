@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@types/chai@4.0.4":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.0.4.tgz#fe86315d9a66827feeb16f73bc954688ec950e18"
+"@types/chai@4.1.7":
+  version "4.1.7"
+  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.1.7.tgz#1b8e33b61a8c09cbe1f85133071baa0dbf9fa71a"
 
 "@types/connect@*":
   version "3.4.31"

@@ -11,9 +11,9 @@
     "test:ci": "meteor test --once --driver-package dispatch:mocha-phantomjs"
   },
   "devDependencies": {
-    "@types/chai": "^3.4.33",
+    "@types/chai": "^4.0.0",
     "@types/mocha": "^2.2.32",
-    "chai": "3.5.0",
+    "chai": "4.2.0",
     "chai-spies": "0.7.1"
   },
   "dependencies": {
