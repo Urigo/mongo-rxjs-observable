@@ -30,7 +30,7 @@
     "angular2-meteor-tests-polyfills": "0.0.2",
     "meteor-node-stubs": "0.2.3",
     "meteor-rxjs": "../../",
-    "reflect-metadata": "0.1.8",
+    "reflect-metadata": "0.1.13",
     "rxjs": "5.0.0-beta.12",
     "zone.js": "0.6.26"
   }
