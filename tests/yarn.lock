@@ -2,7 +2,40 @@
 # yarn lockfile v1
 
 
-babel-runtime@6.26.0:
+"@types/connect@*":
+  version "3.4.32"
+  resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.32.tgz#aa0e9616b9435ccad02bc52b5b454ffc2c70ba28"
+  dependencies:
+    "@types/node" "*"
+
+"@types/meteor@^1.4.6":
+  version "1.4.27"
+  resolved "https://registry.yarnpkg.com/@types/meteor/-/meteor-1.4.27.tgz#d1057d0418fba0965b5a9e96fadecc4097600ec3"
+  dependencies:
+    "@types/connect" "*"
+    "@types/react" "*"
+    "@types/underscore" "*"
+
+"@types/node@*":
+  version "11.11.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.11.5.tgz#0c57e12eb44d44e5b6735593925286553ee7cebf"
+
+"@types/prop-types@*":
+  version "15.7.0"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.0.tgz#4c48fed958d6dcf9487195a0ef6456d5f6e0163a"
+
+"@types/react@*":
+  version "16.8.8"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.8.tgz#4b60a469fd2469f7aa6eaa0f8cfbc51f6d76e662"
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
+
+"@types/underscore@*":
+  version "1.8.13"
+  resolved "https://registry.yarnpkg.com/@types/underscore/-/underscore-1.8.13.tgz#e1bf89141fbccb71dcb3bf12d86a923c007698e3"
+
+babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
@@ -20,9 +53,9 @@ brace-expansion@^1.1.7:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
-commander@^2.11.0:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.0.tgz#ad2a23a1c3b036e392469b8012cec6b33b4c1322"
+commander@^2.15.0:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -32,23 +65,27 @@ core-js@^2.4.0:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.3.tgz#8acc38345824f16d8365b7c9b4259168e8ed603e"
 
-debug@^2.6.8:
-  version "2.6.9"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
-  dependencies:
-    ms "2.0.0"
+csstype@^2.2.0:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.3.tgz#b701e5968245bf9b08d54ac83d00b624e622a9fa"
 
-es6-shim@0.35.3:
-  version "0.35.3"
-  resolved "https://registry.yarnpkg.com/es6-shim/-/es6-shim-0.35.3.tgz#9bfb7363feffff87a6cdb6cd93e405ec3c4b6f26"
+debug@^3.1.0:
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
+  dependencies:
+    ms "^2.1.1"
+
+es6-shim@^0.35.3:
+  version "0.35.5"
+  resolved "https://registry.yarnpkg.com/es6-shim/-/es6-shim-0.35.5.tgz#46f59dc0a84a1c5029e8ff1166ca0a902077a9ab"
 
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
-glob@^7.0.5:
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
+glob@^7.1.3:
+  version "7.1.3"
+  resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.3.tgz#3960832d3f1574108342dafd3a67b332c0969df1"
   dependencies:
     fs.realpath "^1.0.0"
     inflight "^1.0.4"
@@ -68,15 +105,15 @@ inherits@2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
-linklocal@2.8.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/linklocal/-/linklocal-2.8.1.tgz#3db5a1767afaa127772bdc7a80cbae460dfa30a5"
+linklocal@^2.8.1:
+  version "2.8.2"
+  resolved "https://registry.yarnpkg.com/linklocal/-/linklocal-2.8.2.tgz#c69e8864daac79369029892b17d5a8089275dca7"
   dependencies:
-    commander "^2.11.0"
-    debug "^2.6.8"
+    commander "^2.15.0"
+    debug "^3.1.0"
     map-limit "0.0.1"
     mkdirp "^0.5.1"
-    rimraf "^2.6.1"
+    rimraf "^2.6.2"
 
 map-limit@0.0.1:
   version "0.0.1"
@@ -85,7 +122,7 @@ map-limit@0.0.1:
     once "~1.3.0"
 
 "meteor-rxjs@file:..":
-  version "0.4.8"
+  version "0.4.11"
 
 minimatch@^3.0.4:
   version "3.0.4"
@@ -103,9 +140,9 @@ mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
-ms@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
+ms@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
 
 once@^1.3.0:
   version "1.4.0"
@@ -127,26 +164,30 @@ regenerator-runtime@^0.11.0:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
 
-rimraf@^2.6.1:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
+rimraf@^2.6.2:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.3.tgz#b2d104fe0d8fb27cf9e0a1cda8262dd3833c6cab"
   dependencies:
-    glob "^7.0.5"
+    glob "^7.1.3"
 
-rxjs@5.4.3:
-  version "5.4.3"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.4.3.tgz#0758cddee6033d68e0fd53676f0f3596ce3d483f"
+rxjs-compat@^6.0.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/rxjs-compat/-/rxjs-compat-6.4.0.tgz#800923c15697948e1f30f18c531b12b49451c75c"
+
+rxjs@^6.0.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.4.0.tgz#f3bb0fe7bda7fb69deac0c16f17b50b0b8790504"
   dependencies:
-    symbol-observable "^1.0.1"
+    tslib "^1.9.0"
 
-symbol-observable@^1.0.1:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+tslib@^1.9.0:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
 wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
 
-zone.js@0.8.17:
-  version "0.8.17"
-  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.17.tgz#4c5e5185a857da8da793daf3919371c5a36b2a0b"
+zone.js@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.9.0.tgz#f42319d657f7616724ed40c5907d4614b4c683fa"
