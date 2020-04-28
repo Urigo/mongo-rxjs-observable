@@ -45,7 +45,7 @@
     "@types/meteor": "1.4.14",
     "@types/mocha": "2.2.43",
     "@types/underscore": "1.8.3",
-    "conventional-changelog": "1.1.0",
+    "conventional-changelog": "1.1.24",
     "conventional-changelog-cli": "1.2.0",
     "jsdoc-to-markdown": "3.0.0",
     "rollup": "1.10.0",
